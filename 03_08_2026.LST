@@ -1,0 +1,284 @@
+select * from Employee;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000      
+                   10                                                           
+                                                                                
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000      
+      4000         20                                                           
+                                                                                
+     12675 Tanmay Domadiya      President             05-JUL-85     124000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650      
+      1700         30                                                           
+                                                                                
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000      
+                   10                                                           
+                                                                                
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000      
+                   40                                                           
+                                                                                
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000      
+      6500         20                                                           
+                                                                                
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000      
+                   10                                                           
+                                                                                
+     10345 Neha                 Clerk                 18-NOV-90      15000      
+                   10                                                           
+                                                                                
+
+11 rows selected.
+
+SQL> select * from Department;
+
+   DEPT_NO DEPART_NAME          LOCATION                                        
+---------- -------------------- ---------------                                 
+        10 IT                   Anand                                           
+        20 Sales                Bombay                                          
+        30 Purchase             Surat                                           
+        40 Finace               Anand                                           
+        50 Marketing            Surat                                           
+
+SQL> insert into Department values(10,'HR',null);
+insert into Department values(10,'HR',null)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.DEPT_NO) violated 
+
+
+SQL> insert into Department values(60,'HR',null);
+
+1 row created.
+
+SQL> select * from Department;
+
+   DEPT_NO DEPART_NAME          LOCATION                                        
+---------- -------------------- ---------------                                 
+        10 IT                   Anand                                           
+        20 Sales                Bombay                                          
+        30 Purchase             Surat                                           
+        40 Finace               Anand                                           
+        50 Marketing            Surat                                           
+        60 HR                                                                   
+
+6 rows selected.
+
+SQL> delete from Department where dept_no=60;
+
+1 row deleted.
+
+SQL> select * from Department;
+
+   DEPT_NO DEPART_NAME          LOCATION                                        
+---------- -------------------- ---------------                                 
+        10 IT                   Anand                                           
+        20 Sales                Bombay                                          
+        30 Purchase             Surat                                           
+        40 Finace               Anand                                           
+        50 Marketing            Surat                                           
+
+SQL> insert into department values(60,'HR');
+insert into department values(60,'HR')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> insert into Department values(60,'HR');
+insert into Department values(60,'HR')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into Department values(60,'HR',DEFAULT);
+
+1 row created.
+
+SQL> select *from Department;
+
+   DEPT_NO DEPART_NAME          LOCATION                                        
+---------- -------------------- ---------------                                 
+        10 IT                   Anand                                           
+        20 Sales                Bombay                                          
+        30 Purchase             Surat                                           
+        40 Finace               Anand                                           
+        50 Marketing            Surat                                           
+        60 HR                   Rajkot                                          
+
+6 rows selected.
+
+SQL> select * from Employee where salary BETWEEN 20000 and 90000;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000      
+                   10                                                           
+                                                                                
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000      
+                   10                                                           
+                                                                                
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000      
+                   10                                                           
+                                                                                
+
+SQL> select *from Employee where dept_id=10;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000      
+                   10                                                           
+                                                                                
+     12675 Tanmay Domadiya      President             05-JUL-85     124000      
+                   10                                                           
+                                                                                
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000      
+                   10                                                           
+                                                                                
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000      
+                   10                                                           
+                                                                                
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     10345 Neha                 Clerk                 18-NOV-90      15000      
+                   10                                                           
+                                                                                
+
+7 rows selected.
+
+SQL> set linesize 100;
+SQL> select * from Employee;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID    
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------    
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000                    10    
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000       4000         20    
+     12675 Tanmay Domadiya      President             05-JUL-85     124000                    10    
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650       1700         30    
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10    
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10    
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000                    40    
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000       6500         20    
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10    
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10    
+     10345 Neha                 Clerk                 18-NOV-90      15000                    10    
+
+11 rows selected.
+
+SQL> delete from Employee where emp_id=10345;
+
+1 row deleted.
+
+SQL> select * from Employee;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID    
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------    
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000                    10    
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000       4000         20    
+     12675 Tanmay Domadiya      President             05-JUL-85     124000                    10    
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650       1700         30    
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10    
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10    
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000                    40    
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000       6500         20    
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10    
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10    
+
+10 rows selected.
+
+SQL> select * from Employee where dept_id=10;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID    
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------    
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000                    10    
+     12675 Tanmay Domadiya      President             05-JUL-85     124000                    10    
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10    
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10    
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10    
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10    
+
+6 rows selected.
+
+SQL> select * from Employee where salary>25000 dept_id=10;
+select * from Employee where salary>25000 dept_id=10
+                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> seelct dept_id=10 from Employee where salary>25000;
+SP2-0734: unknown command beginning "seelct dep..." - rest of line ignored.
+SQL> select dept_id=10 from Employee where salary>25000;
+select dept_id=10 from Employee where salary>25000
+              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select * from Employee where salary > 25000 and dept_id=10;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID    
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------    
+     12675 Tanmay Domadiya      President             05-JUL-85     124000                    10    
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10    
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10    
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10    
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10    
+
+SQL> 

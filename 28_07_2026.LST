@@ -1,0 +1,283 @@
+alter table Department ADD CONSTRANT dept_no FOREIGN KEY(Employee dept_id) REFERENCES Employee(detp_id);
+alter table Department ADD CONSTRANT dept_no FOREIGN KEY(Employee dept_id) REFERENCES Employee(detp_id)
+                                             *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> alter table Department ADD CONSTRAINT dept_no FOREIGN KEY(Employee dept_id) REFERENCES Employee(detp_id);
+alter table Department ADD CONSTRAINT dept_no FOREIGN KEY(Employee dept_id) REFERENCES Employee(detp_id)
+                                                                   *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> 
+SQL>   EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID
+SP2-0734: unknown command beginning "EMP_ID EMP..." - rest of line ignored.
+SQL> -------- -------------------- ---------- ---------- --------- ---------- ---------- ----------
+SQL>    12345 Bansi Padiya         Clerk                 18-NOV-90      15000                    10
+SQL>    13254 Radha Sharma         Salesman        12345 25-NOV-90      12000       4000         20
+SQL>    12675 Tanmay Domadiya      President             05-JUL-85     124000                    10
+SQL>    13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650       1700         30
+SQL>    14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10
+SQL>    16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10
+SQL>    14562 Kalpana Joshi        Clerk                 17-SEP-90      17000                    40
+SQL>    12435 Keval Raval          Salesman        12345 20-OCT-90      18000       6500         20
+SQL>    13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10
+SQL>    18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10
+SQL>    10345 Neha                 Clerk                 18-NOV-90      15000                    10
+SQL> alter table Employee ADD CONSTRAINT dept FOREIGN KEY(dept_id) REFERNCES Department (dept_no);
+alter table Employee ADD CONSTRAINT dept FOREIGN KEY(dept_id) REFERNCES Department (dept_no)
+                                                              *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL>  alter table Employee ADD CONSTRAINT dept FOREIGN KEY(dept_id) REFERENCES Department (dept_no);
+ alter table Employee ADD CONSTRAINT dept FOREIGN KEY(dept_id) REFERENCES Department (dept_no)
+                                                                                      *
+ERROR at line 1:
+ORA-02270: no matching unique or primary key for this column-list 
+
+
+SQL>   alter table Employee ADD CONSTRAINT dept FOREIGN KEY(dept_id) REFERENCES Department (DEPT_No);
+  alter table Employee ADD CONSTRAINT dept FOREIGN KEY(dept_id) REFERENCES Department (DEPT_No)
+                                                                                       *
+ERROR at line 1:
+ORA-02270: no matching unique or primary key for this column-list 
+
+
+SQL>  alter table Employee ADD CONSTRAINT dept FOREIGN KEY(dept_id) REFERENCES Department (DEPT_NO);
+ alter table Employee ADD CONSTRAINT dept FOREIGN KEY(dept_id) REFERENCES Department (DEPT_NO)
+                                                                                      *
+ERROR at line 1:
+ORA-02270: no matching unique or primary key for this column-list 
+
+
+SQL> alter table Department ADD CONSTRAINT dept_no PRIMARY KEY (dept_no);
+
+Table altered.
+
+SQL>  alter table Employee ADD CONSTRAINT dept FOREIGN KEY(dept_id) REFERENCES Department (dept_no);
+
+Table altered.
+
+SQL> select * from Employee;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID                                                      
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------                                                      
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000                    10                                                      
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000       4000         20                                                      
+     12675 Tanmay Domadiya      President             05-JUL-85     124000                    10                                                      
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650       1700         30                                                      
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10                                                      
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10                                                      
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000                    40                                                      
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000       6500         20                                                      
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10                                                      
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10                                                      
+     10345 Neha                 Clerk                 18-NOV-90      15000                    10                                                      
+
+11 rows selected.
+
+SQL> select * from Department;
+
+   DEPT_NO DEPART_NAME          LOCATION                                                                                                              
+---------- -------------------- ---------------                                                                                                       
+        10 IT                   Anand                                                                                                                 
+        20 Sales                Bombay                                                                                                                
+        30 Purchase             Surat                                                                                                                 
+        40 Finace               Anand                                                                                                                 
+        50 Marketing            Surat                                                                                                                 
+
+SQL> insert into Employee values(1,'neha','Clerk',null,to_date('2006-06-17','yyyy-mm-dd'),20000,null,60);
+insert into Employee values(1,'neha','Clerk',null,to_date('2006-06-17','yyyy-mm-dd'),20000,null,60)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SCOTT.DEPT) violated - parent key not found 
+
+
+SQL>  insert into Employee values(1,'neha','Clerk',null,to_date('2006-06-17','yyyy-mm-dd'),20000,null,50);
+
+1 row created.
+
+SQL> select * from Employee;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID                                                      
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------                                                      
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000                    10                                                      
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000       4000         20                                                      
+     12675 Tanmay Domadiya      President             05-JUL-85     124000                    10                                                      
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650       1700         30                                                      
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10                                                      
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10                                                      
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000                    40                                                      
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000       6500         20                                                      
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10                                                      
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10                                                      
+     10345 Neha                 Clerk                 18-NOV-90      15000                    10                                                      
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID                                                      
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------                                                      
+         1 neha                 Clerk                 17-JUN-06      20000                    50                                                      
+
+12 rows selected.
+
+SQL> delete from Employee where emp_id=1;
+
+1 row deleted.
+
+SQL> select * from Employee;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID                                                      
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------                                                      
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000                    10                                                      
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000       4000         20                                                      
+     12675 Tanmay Domadiya      President             05-JUL-85     124000                    10                                                      
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650       1700         30                                                      
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10                                                      
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10                                                      
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000                    40                                                      
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000       6500         20                                                      
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10                                                      
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10                                                      
+     10345 Neha                 Clerk                 18-NOV-90      15000                    10                                                      
+
+11 rows selected.
+
+SQL> alter table Employee ADD CONSTRAINT salary CHEAK where salary>20000;
+alter table Employee ADD CONSTRAINT salary CHEAK where salary>20000
+                                                 *
+ERROR at line 1:
+ORA-00902: invalid datatype 
+
+
+SQL> alter table Employee ADD CONSTRAINT salary CHECK where salary>20000;
+alter table Employee ADD CONSTRAINT salary CHECK where salary>20000
+                                                 *
+ERROR at line 1:
+ORA-00906: missing left parenthesis 
+
+
+SQL>  alter table Employee ADD CONSTRAINT salary CHECK salary>20000;
+ alter table Employee ADD CONSTRAINT salary CHECK salary>20000
+                                                  *
+ERROR at line 1:
+ORA-00906: missing left parenthesis 
+
+
+SQL> alter table Employee ADD CONSTRAINT salary CHECK (salary>20000);
+alter table Employee ADD CONSTRAINT salary CHECK (salary>20000)
+                                    *
+ERROR at line 1:
+ORA-02293: cannot validate (SCOTT.SALARY) - check constraint violated 
+
+
+SQL> alter table Employee ADD CONSTRAINT salary CHECK (salary<20000);
+alter table Employee ADD CONSTRAINT salary CHECK (salary<20000)
+                                    *
+ERROR at line 1:
+ORA-02293: cannot validate (SCOTT.SALARY) - check constraint violated 
+
+
+SQL> alter table Employee ADD CONSTRAINT salary CHECK (20000>60000);
+alter table Employee ADD CONSTRAINT salary CHECK (20000>60000)
+                                    *
+ERROR at line 1:
+ORA-02293: cannot validate (SCOTT.SALARY) - check constraint violated 
+
+
+SQL> ALTER TABLE Employee ADD CONSTRAINT salary_chk CHECK (salary > 20000);
+ALTER TABLE Employee ADD CONSTRAINT salary_chk CHECK (salary > 20000)
+                                    *
+ERROR at line 1:
+ORA-02293: cannot validate (SCOTT.SALARY_CHK) - check constraint violated 
+
+
+SQL> 
+SQL> ALTER TABLE Employee ADD CONSTRAINT salary_chk CHECK (salary > 20000) NOVALIDATE;
+
+Table altered.
+
+SQL> select * from Employee;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID                                                      
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------                                                      
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000                    10                                                      
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000       4000         20                                                      
+     12675 Tanmay Domadiya      President             05-JUL-85     124000                    10                                                      
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650       1700         30                                                      
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10                                                      
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10                                                      
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000                    40                                                      
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000       6500         20                                                      
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10                                                      
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10                                                      
+     10345 Neha                 Clerk                 18-NOV-90      15000                    10                                                      
+
+11 rows selected.
+
+SQL> insert into Employee values(1,'neha','Clerk',null,to_date('2006-06-17','yyyy-mm-dd'),40000,null,10);
+
+1 row created.
+
+SQL>  insert into Employee values(1,'neha','Clerk',null,to_date('2006-06-17','yyyy-mm-dd'),10000,null,10);
+ insert into Employee values(1,'neha','Clerk',null,to_date('2006-06-17','yyyy-mm-dd'),10000,null,10)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SALARY_CHK) violated 
+
+
+SQL> delet from Employee where emp_id=1;
+SP2-0734: unknown command beginning "delet from..." - rest of line ignored.
+SQL>  delete from Employee where emp_id=1;
+
+1 row deleted.
+
+SQL> 
+SQL> select * from Employee;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID                                                      
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------                                                      
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000                    10                                                      
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000       4000         20                                                      
+     12675 Tanmay Domadiya      President             05-JUL-85     124000                    10                                                      
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650       1700         30                                                      
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10                                                      
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10                                                      
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000                    40                                                      
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000       6500         20                                                      
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10                                                      
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10                                                      
+     10345 Neha                 Clerk                 18-NOV-90      15000                    10                                                      
+
+11 rows selected.
+
+SQL> ALTER TABLE Employee ADD CONSTRAINT salary_chk CHECK (salary > 2000);
+ALTER TABLE Employee ADD CONSTRAINT salary_chk CHECK (salary > 2000)
+                                    *
+ERROR at line 1:
+ORA-02264: name already used by an existing constraint 
+
+
+SQL> ALTER TABLE Employee DROP CONSTRAINT salary_chk;
+
+Table altered.
+
+SQL> ALTER TABLE Employee ADD CONSTRAINT salary_chk CHECK (salary > 2000);
+
+Table altered.
+
+SQL>  insert into Employee values(1,'neha','Clerk',null,to_date('2006-06-17','yyyy-mm-dd'),1000,null,10);
+ insert into Employee values(1,'neha','Clerk',null,to_date('2006-06-17','yyyy-mm-dd'),1000,null,10)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SALARY_CHK) violated 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

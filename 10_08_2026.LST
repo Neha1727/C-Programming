@@ -1,0 +1,206 @@
+create table Course_Master(c_code number(5) PRIMARY KEY,c_name varchar2(20));
+
+Table created.
+
+SQL> create table Student_Master(sno number(5) PRIMARY KEY,sname varchar2(20),c_code number(5) REFERENCES Course_master(c_code),city varchar2(10),age number(3));
+
+Table created.
+
+SQL> create table Fee_Master (sno number(5) REFERENCES student_master(sno),fee number(8));
+
+Table created.
+
+SQL> insert into course_master values(101,'BCA');
+
+1 row created.
+
+SQL> insert into course_master values(102,'BBA');
+
+1 row created.
+
+SQL> insert into course_master values(103,'BCOM');
+
+1 row created.
+
+SQL> select * from course_master;
+
+    C_CODE C_NAME                                                               
+---------- --------------------                                                 
+       101 BCA                                                                  
+       102 BBA                                                                  
+       103 BCOM                                                                 
+
+SQL> insert into student_master values(10,'Madhvi',101,'Rajkot',20);
+
+1 row created.
+
+SQL> insert into student_master values(11,'Mahek',102,'Jamnagar',23);
+
+1 row created.
+
+SQL> insert into student_master values(12,'Rajesh',103,'Rajkot',24);
+
+1 row created.
+
+SQL> insert into student_master values(13,'Mehul',101,'Surat',26);
+
+1 row created.
+
+SQL> insert into student_master values(14,'Manisha',101,'Rajkot',25);
+
+1 row created.
+
+SQL> insert into student_master values(15,'Rekha',102,'Jamnagar',18);
+
+1 row created.
+
+SQL> select * from student_master;
+
+       SNO SNAME                    C_CODE CITY              AGE                
+---------- -------------------- ---------- ---------- ----------                
+        10 Madhvi                      101 Rajkot             20                
+        11 Mahek                       102 Jamnagar           23                
+        12 Rajesh                      103 Rajkot             24                
+        13 Mehul                       101 Surat              26                
+        14 Manisha                     101 Rajkot             25                
+        15 Rekha                       102 Jamnagar           18                
+
+6 rows selected.
+
+SQL> insert into fee_master values(10,5000);
+
+1 row created.
+
+SQL> insert into fee_master values(11,0);
+
+1 row created.
+
+SQL> insert into fee_master values(12,6000);
+
+1 row created.
+
+SQL> insert into fee_master values(13,0);
+
+1 row created.
+
+SQL> insert into fee_master values(14,5500);
+
+1 row created.
+
+SQL> insert into fee_master values(15,4500);
+
+1 row created.
+
+SQL> select * from fee_master;
+
+       SNO        FEE                                                           
+---------- ----------                                                           
+        10       5000                                                           
+        11          0                                                           
+        12       6000                                                           
+        13          0                                                           
+        14       5500                                                           
+        15       4500                                                           
+
+6 rows selected.
+
+SQL> select * from student_master where city in(jamnagar,Rajkot,surat);
+select * from student_master where city in(jamnagar,Rajkot,surat)
+                                                           *
+ERROR at line 1:
+ORA-00904: "SURAT": invalid identifier 
+
+
+SQL>  select * from student_master where city in(jamnagar,Rajkot,Surat);
+ select * from student_master where city in(jamnagar,Rajkot,Surat)
+                                                            *
+ERROR at line 1:
+ORA-00904: "SURAT": invalid identifier 
+
+
+SQL> 
+SQL>  select * from student_master where city in('Jamnagar','Rajkot','Surat');
+
+       SNO SNAME                    C_CODE CITY              AGE                
+---------- -------------------- ---------- ---------- ----------                
+        10 Madhvi                      101 Rajkot             20                
+        11 Mahek                       102 Jamnagar           23                
+        12 Rajesh                      103 Rajkot             24                
+        13 Mehul                       101 Surat              26                
+        14 Manisha                     101 Rajkot             25                
+        15 Rekha                       102 Jamnagar           18                
+
+6 rows selected.
+
+SQL> update student_master set city='Mumbai' where sno=11;
+
+1 row updated.
+
+SQL> update student_master set city='Ahmedabad' where sno=12;
+
+1 row updated.
+
+SQL> select * from student_master;
+
+       SNO SNAME                    C_CODE CITY              AGE                
+---------- -------------------- ---------- ---------- ----------                
+        10 Madhvi                      101 Rajkot             20                
+        11 Mahek                       102 Mumbai             23                
+        12 Rajesh                      103 Ahmedabad          24                
+        13 Mehul                       101 Surat              26                
+        14 Manisha                     101 Rajkot             25                
+        15 Rekha                       102 Jamnagar           18                
+
+6 rows selected.
+
+SQL>  select * from student_master where city in('Jamnagar','Rajkot','Surat');
+
+       SNO SNAME                    C_CODE CITY              AGE                
+---------- -------------------- ---------- ---------- ----------                
+        10 Madhvi                      101 Rajkot             20                
+        13 Mehul                       101 Surat              26                
+        14 Manisha                     101 Rajkot             25                
+        15 Rekha                       102 Jamnagar           18                
+
+SQL> SELECT s.* FROM student_master s, fee f WHERE s.sno = f.sno AND f.fee = 0;
+SELECT s.* FROM student_master s, fee f WHERE s.sno = f.sno AND f.fee = 0
+                                  *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT s.* FROM student_master s,fee_master f  WHERE s.sno = f.sno AND f.fee = 0;
+
+       SNO SNAME                    C_CODE CITY              AGE                
+---------- -------------------- ---------- ---------- ----------                
+        11 Mahek                       102 Mumbai             23                
+        13 Mehul                       101 Surat              26                
+
+SQL> select c.c_name,s.sname,s.c_code,s.city,s.age from student_master s,Course_master c where s.c_code=c.c_code;
+
+C_NAME               SNAME                    C_CODE CITY              AGE      
+-------------------- -------------------- ---------- ---------- ----------      
+BCA                  Madhvi                      101 Rajkot             20      
+BBA                  Mahek                       102 Mumbai             23      
+BCOM                 Rajesh                      103 Ahmedabad          24      
+BCA                  Mehul                       101 Surat              26      
+BCA                  Manisha                     101 Rajkot             25      
+BBA                  Rekha                       102 Jamnagar           18      
+
+6 rows selected.
+
+SQL> select s.sname,c.c_name,s.age from student_master s,course_master c where s.c_code=c.c_code ands.age > 23 and s.age < 27 and c.c_name='BCA';
+select s.sname,c.c_name,s.age from student_master s,course_master c where s.c_code=c.c_code ands.age > 23 and s.age < 27 and c.c_name='BCA'
+                                                                                            *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select s.sname,c.c_name,s.age from student_master s,course_master c where s.c_code=c.c_code and s.age > 23 and s.age < 27 and c.c_name='BCA';
+
+SNAME                C_NAME                      AGE                            
+-------------------- -------------------- ----------                            
+Mehul                BCA                          26                            
+Manisha              BCA                          25                            
+
+SQL> 

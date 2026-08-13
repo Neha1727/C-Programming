@@ -1,0 +1,327 @@
+create table item_master(item_id number(5),item_name vrachar2(20),price number(5),company_code number(5));
+create table item_master(item_id number(5),item_name vrachar2(20),price number(5),company_code number(5))
+                                                             *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> create table item_master(item_id number(5),item_name varchar2(20),price number(5),company_code number(5));
+
+Table created.
+
+SQL> desc tab;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ TNAME                                     NOT NULL VARCHAR2(30)
+ TABTYPE                                            VARCHAR2(7)
+ CLUSTERID                                          NUMBER
+
+SQL> desc table item_master;
+Usage: DESCRIBE [schema.]object[@db_link]
+SQL> desc item_master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ITEM_ID                                            NUMBER(5)
+ ITEM_NAME                                          VARCHAR2(20)
+ PRICE                                              NUMBER(5)
+ COMPANY_CODE                                       NUMBER(5)
+
+SQL> insert into item_master values(101,'Pen',10,c001);
+insert into item_master values(101,'Pen',10,c001)
+                                            *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL>  insert into item_master values(101,'Pen',10,C001);
+ insert into item_master values(101,'Pen',10,C001)
+                                             *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> ALTER TABLE item_masterMODIFY (company_code VARCHAR2(5));
+ALTER TABLE item_masterMODIFY (company_code VARCHAR2(5))
+                              *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> select * from Employee where salary > 25000 and dept_id=10;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     12675 Tanmay Domadiya      President             05-JUL-85     124000      
+                   10                                                           
+                                                                                
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000      
+                   10                                                           
+                                                                                
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000      
+                   10                                                           
+                                                                                
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000      
+                   10                                                           
+                                                                                
+
+SQL> ALTER TABLE item_master MODIFY (company_code VARCHAR2(5));
+
+Table altered.
+
+SQL> desc item_master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ITEM_ID                                            NUMBER(5)
+ ITEM_NAME                                          VARCHAR2(20)
+ PRICE                                              NUMBER(5)
+ COMPANY_CODE                                       VARCHAR2(5)
+
+SQL>  insert into item_master values(101,'Pen',10,'Coo1');
+
+1 row created.
+
+SQL> insert into item_master values(102,'Book',50,'C002');
+
+1 row created.
+
+SQL> insert into item_master values(103,'pencil',5,'C003');
+
+1 row created.
+
+SQL> insert into item_master values(104, 'Marker', 25, 'C004');
+
+1 row created.
+
+SQL> insert into item_master values(105, 'Scale', 15, 'C002');
+
+1 row created.
+
+SQL> update item_master set company_code=C001 where item_id=104;
+update item_master set company_code=C001 where item_id=104
+                                    *
+ERROR at line 1:
+ORA-00904: "C001": invalid identifier 
+
+
+SQL> update item_master set company_code='C001' where item_id=104;
+
+1 row updated.
+
+SQL> select *from item_master;
+
+   ITEM_ID ITEM_NAME                 PRICE COMPA                                
+---------- -------------------- ---------- -----                                
+       101 Pen                          10 Coo1                                 
+       102 Book                         50 C002                                 
+       103 pencil                        5 C003                                 
+       104 Marker                       25 C001                                 
+       105 Scale                        15 C002                                 
+
+SQL> truncated table item_master;
+SP2-0734: unknown command beginning "truncated ..." - rest of line ignored.
+SQL> truncate table item_master;
+
+Table truncated.
+
+SQL> select * from item_master;
+
+no rows selected
+
+SQL> DROP TABLE item_master PURGE;
+
+Table dropped.
+
+SQL> desc tab;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ TNAME                                     NOT NULL VARCHAR2(30)
+ TABTYPE                                            VARCHAR2(7)
+ CLUSTERID                                          NUMBER
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+ASDF                           TABLE                                            
+BIN$a8jEymmqQn+cWQq7BlNcLQ==$0 TABLE                                            
+CUSTOMERS                      TABLE                                            
+BIN$EZCqwOrZSHqxvlVTgxkhfg==$0 TABLE                                            
+ORDERS                         TABLE                                            
+DEPT_NEW                       TABLE                                            
+EMP22                          TABLE                                            
+DEPT                           TABLE                                            
+EMP                            TABLE                                            
+BONUS                          TABLE                                            
+SALGRADE                       TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+BIN$w6/V2UhSSWm3RwPdZo89rg==$0 TABLE                                            
+DEPARTMENT                     TABLE                                            
+ORACLE                         TABLE                                            
+STUD                           TABLE                                            
+STUDENT                        TABLE                                            
+BIN$SxZHUbg6RrqC9qwlUI5y1g==$0 TABLE                                            
+MANSI                          TABLE                                            
+BIN$B12fw8eAQfq9xlsAHqBmhg==$0 TABLE                                            
+ACTORS                         TABLE                                            
+SQL                            TABLE                                            
+BIN$xzGG0rP3SwGvXxV3O+8Cag==$0 TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+BIN$tKYGVY3iQW2qA55nIdpQUw==$0 TABLE                                            
+FILM                           TABLE                                            
+BIN$xYmWHGC5REyJJznSDUquQQ==$0 TABLE                                            
+BIN$5SHYaF3wR2CmHabZCoqogQ==$0 TABLE                                            
+COLLEGE                        TABLE                                            
+SING                           TABLE                                            
+STUDENTS                       TABLE                                            
+ADITI                          TABLE                                            
+SHRUTI                         TABLE                                            
+ABC                            TABLE                                            
+BSCIT                          TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+STUD1                          TABLE                                            
+STUDY                          TABLE                                            
+STUDENT2                       TABLE                                            
+BCA                            TABLE                                            
+REST                           TABLE                                            
+VIEEW                          TABLE                                            
+ADITII                         TABLE                                            
+PERSONS                        TABLE                                            
+EMPLOYEES                      TABLE                                            
+STAFF                          TABLE                                            
+BIN$8GgEvRQcTkm0nUp3bkIjIw==$0 TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+COURCE                         TABLE                                            
+SUPPLIER                       TABLE                                            
+CITY                           TABLE                                            
+STATE                          TABLE                                            
+COMPANY                        TABLE                                            
+ROLLUPTEST                     TABLE                                            
+EMPLOYEE                       TABLE                                            
+
+51 rows selected.
+
+SQL> create table item_master (item_id number(5) PRIMARY KEY,item_name varchar2(20),price number(7),company_code number(5));
+
+Table created.
+
+SQL> desc item_master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ITEM_ID                                   NOT NULL NUMBER(5)
+ ITEM_NAME                                          VARCHAR2(20)
+ PRICE                                              NUMBER(7)
+ COMPANY_CODE                                       NUMBER(5)
+
+SQL> select * from Employee;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000      
+                   10                                                           
+                                                                                
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000      
+      4000         20                                                           
+                                                                                
+     12675 Tanmay Domadiya      President             05-JUL-85     124000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650      
+      1700         30                                                           
+                                                                                
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000      
+                   10                                                           
+                                                                                
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000      
+                   40                                                           
+                                                                                
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000      
+      6500         20                                                           
+                                                                                
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000      
+                   10                                                           
+                                                                                
+     10345 Neha                 Clerk                 18-NOV-90      15000      
+                   10                                                           
+                                                                                
+
+11 rows selected.
+
+SQL> insert into item_master values(101,'Watch',600,16);
+
+1 row created.
+
+SQL> insert into item_master values(101,'Bag',300,17);
+insert into item_master values(101,'Bag',300,17)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.SYS_C005327) violated 
+
+
+SQL> insert into item_master values(102,'Bag',300,17);
+
+1 row created.
+
+SQL> insert into item_master values(103,'Calculator',450,16);
+
+1 row created.
+
+SQL> insert into item_master values(104,'Notebook',250,18);
+
+1 row created.
+
+SQL> insert into item_master values(105,'Pen',100,17);
+
+1 row created.
+
+SQL> select * from item_master;
+
+   ITEM_ID ITEM_NAME                 PRICE COMPANY_CODE                         
+---------- -------------------- ---------- ------------                         
+       101 Watch                       600           16                         
+       102 Bag                         300           17                         
+       103 Calculator                  450           16                         
+       104 Notebook                    250           18                         
+       105 Pen                         100           17                         
+
+SQL> 

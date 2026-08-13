@@ -1,0 +1,68 @@
+SET LINESIZE 150;
+SQL> SELECT * FROM eMPLOYEE;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY COMMISSION    DEPT_ID                                                      
+---------- -------------------- ---------- ---------- --------- ---------- ---------- ----------                                                      
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000                    10                                                      
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000       4000         20                                                      
+     12675 Tanmay Domadiya      President             05-JUL-85     124000                    10                                                      
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650       1700         30                                                      
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000                    10                                                      
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000                    10                                                      
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000                    40                                                      
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000       6500         20                                                      
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000                    10                                                      
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000                    10                                                      
+     10345 Neha                 Clerk                 18-NOV-90      15000                    10                                                      
+
+11 rows selected.
+
+SQL> SELECT * FROM dEPARTMENT;
+
+   DEPT_NO DEPART_NAME          LOCATION                                                                                                              
+---------- -------------------- ---------------                                                                                                       
+        10 IT                   Anand                                                                                                                 
+        20 Sales                Bombay                                                                                                                
+        30 Purchase             Surat                                                                                                                 
+        40 Finace               Anand                                                                                                                 
+        50 Marketing            Surat                                                                                                                 
+
+SQL> nd
+SP2-0042: unknown command "nd" - rest of line ignored.
+SQL> bay
+SP2-0042: unknown command "bay" - rest of line ignored.
+SQL> at
+SP2-0042: unknown command "at" - rest of line ignored.
+SQL> nd
+SP2-0042: unknown command "nd" - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> at
+SP2-0042: unknown command "at" - rest of line ignored.
+SQL> 
+SQL> ALTER TABLE DEPARTMENT ADD DEFAULT 'Rajkot' for Location;
+ALTER TABLE DEPARTMENT ADD DEFAULT 'Rajkot' for Location
+                           *
+ERROR at line 1:
+ORA-00904: : invalid identifier 
+
+
+SQL> ALTER TABLE Department MODIFY (Location DEFAULT 'Rajkot');
+
+Table altered.
+
+SQL> insert into Department values(10,'IT', ,);
+insert into Department values(10,'IT', ,)
+                                       *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> insert into Department values(10,'IT',null);
+insert into Department values(10,'IT',null)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.DEPT_NO) violated 
+
+
+SQL> 

@@ -1,0 +1,94 @@
+select * from Employee;
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     12345 Bansi Padiya         Clerk                 18-NOV-90      15000      
+                   10                                                           
+                                                                                
+     13254 Radha Sharma         Salesman        12345 25-NOV-90      12000      
+      4000         20                                                           
+                                                                                
+     12675 Tanmay Domadiya      President             05-JUL-85     124000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     13457 Suraj Prakash        Salesman        12345 12-AUG-92      14650      
+      1700         30                                                           
+                                                                                
+     14567 Seema Lava           Programmer      13654 17-JUL-94      35000      
+                   10                                                           
+                                                                                
+     16754 Krupa Vala           Programmer      13654 13-AUG-92      30000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     14562 Kalpana Joshi        Clerk                 17-SEP-90      17000      
+                   40                                                           
+                                                                                
+     12435 Keval Raval          Salesman        12345 20-OCT-90      18000      
+      6500         20                                                           
+                                                                                
+     13654 Parth Vasoya         Analyst         12675 27-DEC-95      90000      
+                   10                                                           
+                                                                                
+
+    EMP_ID EMP_NAME             POST           MER_ID HIRE_DATE     SALARY      
+---------- -------------------- ---------- ---------- --------- ----------      
+COMMISSION    DEPT_ID                                                           
+---------- ----------                                                           
+     18654 Ramesh Vasoya        Analyst         12675 15-MAY-93      85000      
+                   10                                                           
+                                                                                
+     10345 Neha                 Clerk                 18-NOV-90      15000      
+                   10                                                           
+                                                                                
+
+11 rows selected.
+
+SQL> select * from Depatmentt;
+select * from Depatmentt
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> desc Employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                    NOT NULL NUMBER(5)
+ EMP_NAME                                  NOT NULL VARCHAR2(20)
+ POST                                               VARCHAR2(10)
+ MER_ID                                             NUMBER(5)
+ HIRE_DATE                                          DATE
+ SALARY                                             NUMBER(8)
+ COMMISSION                                         NUMBER(8)
+ DEPT_ID                                            NUMBER(2)
+
+SQL> desc Department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_NO                                            NUMBER(5)
+ DEPART_NAME                                        VARCHAR2(20)
+ LOCATION                                           VARCHAR2(15)
+
+SQL> select * from Department;
+
+   DEPT_NO DEPART_NAME          LOCATION                                        
+---------- -------------------- ---------------                                 
+        10 IT                   Anand                                           
+        20 Sales                Bombay                                          
+        30 Purchase             Surat                                           
+        40 Finace               Anand                                           
+        50 Marketing            Surat                                           
+
+SQL> 
