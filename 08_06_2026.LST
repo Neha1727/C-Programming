@@ -1,0 +1,473 @@
+create table client (c_no number(5) PRIMARY KEY,c_name varchar2(20),city varchar2(9),state varchar2(10),post varchar2(15),salary number(8));
+
+Table created.
+
+SQL> desc Client;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ C_NO                                      NOT NULL NUMBER(5)
+ C_NAME                                             VARCHAR2(20)
+ CITY                                               VARCHAR2(9)
+ STATE                                              VARCHAR2(10)
+ POST                                               VARCHAR2(15)
+ SALARY                                             NUMBER(8)
+
+SQL> insert into Client valueS(101,Ramesh,Rajkot,Gujarat,clerk,10000);
+insert into Client valueS(101,Ramesh,Rajkot,Gujarat,clerk,10000)
+                                                    *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL>  insert into Client valueS(101,'Ramesh','Rajkot','Gujarat','Clerk',10000);
+
+1 row created.
+
+SQL> insert into Client values(102,'Amit','Surat','Gujarat','Manager',6000);
+
+1 row created.
+
+SQL> insert into Client values(103,'Parth','Jamnagar',Gujarat','Developer',9900);
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL>  insert into Client values(103,'Parth','Jamnagar','Gujarat','Developer',9900);
+
+1 row created.
+
+SQL> insert into Client values(104,'Aniket','Rajkot','Gujarat','Clerk',12000);
+
+1 row created.
+
+SQL> insert into Client values(105,'Avni','Surat','Gujarat','Developer',30000)'
+  2   insert into Client values(105,'Avni','Surat','Gujarat','Developer',30000);
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL>  insert into Client values(105,'Avni','Surat','Gujarat','Developer',30000);
+
+1 row created.
+
+SQL> insert into Client values(106,'Krisha','Rajkot','Gujarat','Analyst',30000);
+
+1 row created.
+
+SQL> select * from Client;
+
+      C_NO C_NAME               CITY      STATE      POST                SALARY 
+---------- -------------------- --------- ---------- --------------- ---------- 
+       101 Ramesh               Rajkot    Gujarat    Clerk                10000 
+       102 Amit                 Surat     Gujarat    Manager               6000 
+       103 Parth                Jamnagar  Gujarat    Developer             9900 
+       104 Aniket               Rajkot    Gujarat    Clerk                12000 
+       105 Avni                 Surat     Gujarat    Developer            30000 
+       106 Krisha               Rajkot    Gujarat    Analyst              30000 
+
+6 rows selected.
+
+SQL> select * from Client where post='Manager';
+
+      C_NO C_NAME               CITY      STATE      POST                SALARY 
+---------- -------------------- --------- ---------- --------------- ---------- 
+       102 Amit                 Surat     Gujarat    Manager               6000 
+
+SQL> select * from Client where state='Gujarat' and salary<10000;
+
+      C_NO C_NAME               CITY      STATE      POST                SALARY 
+---------- -------------------- --------- ---------- --------------- ---------- 
+       102 Amit                 Surat     Gujarat    Manager               6000 
+       103 Parth                Jamnagar  Gujarat    Developer             9900 
+
+SQL> select * from Client where post In ('Clerk','Manager');
+
+      C_NO C_NAME               CITY      STATE      POST                SALARY 
+---------- -------------------- --------- ---------- --------------- ---------- 
+       101 Ramesh               Rajkot    Gujarat    Clerk                10000 
+       102 Amit                 Surat     Gujarat    Manager               6000 
+       104 Aniket               Rajkot    Gujarat    Clerk                12000 
+
+SQL> select * from Client post='Developer';
+select * from Client post='Developer'
+                         *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL>  select * from Client where post='Developer';
+
+      C_NO C_NAME               CITY      STATE      POST                SALARY 
+---------- -------------------- --------- ---------- --------------- ---------- 
+       103 Parth                Jamnagar  Gujarat    Developer             9900 
+       105 Avni                 Surat     Gujarat    Developer            30000 
+
+SQL> seletc * from Client where city='Surat' and C_name LIKE 'A';
+SP2-0734: unknown command beginning "seletc * f..." - rest of line ignored.
+SQL> seletc * from Client where city='Surat' and C_name LIKE 'A%';
+SP2-0734: unknown command beginning "seletc * f..." - rest of line ignored.
+SQL> select * from Client where city='Surat' and C_name LIKE 'A';
+
+no rows selected
+
+SQL>  select * from Client where city='Surat' and C_name LIKE 'A%';
+
+      C_NO C_NAME               CITY      STATE      POST                SALARY 
+---------- -------------------- --------- ---------- --------------- ---------- 
+       102 Amit                 Surat     Gujarat    Manager               6000 
+       105 Avni                 Surat     Gujarat    Developer            30000 
+
+SQL> create table Student (Rollno number(5)PRIMARY KEY,Name varchar2(20),city varchar2(10),address vaschar2(40),DOB date NOT NULL,age number(5),Class varchar2(6)NOT NULL,Mobileno number(10)NOT NULL);
+create table Student (Rollno number(5)PRIMARY KEY,Name varchar2(20),city varchar2(10),address vaschar2(40),DOB date NOT NULL,age number(5),Class varchar2(6)NOT NULL,Mobileno number(10)NOT NULL)
+                                                                                                      *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE Student (    Rollno NUMBER(5) PRIMARY KEY,    Name VARCHAR2(20),    City VARCHAR2(10),    Address VARCHAR2(40),    DOB DATE NOT NULL,    Age NUMBER(5),    Class VARCHAR2(6) NOT NULL,    Mobileno NUMBER(10) NOT NULL);
+CREATE TABLE Student (    Rollno NUMBER(5) PRIMARY KEY,    Name VARCHAR2(20),    City VARCHAR2(10),    Address VARCHAR2(40),    DOB DATE NOT NULL,    Age NUMBER(5),    Class VARCHAR2(6) NOT NULL,    Mobileno NUMBER(10) NOT NULL)
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL>  CREATE TABLE Studentes (    Rollno NUMBER(5) PRIMARY KEY,    Name VARCHAR2(20),    City VARCHAR2(10),    Address VARCHAR2(40),    DOB DATE NOT NULL,    Age NUMBER(5),    Class VARCHAR2(6) NOT NULL,
+  2      Mobileno NUMBER(10) NOT NULL);
+
+Table created.
+
+SQL> desc studentes;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                    NOT NULL NUMBER(5)
+ NAME                                               VARCHAR2(20)
+ CITY                                               VARCHAR2(10)
+ ADDRESS                                            VARCHAR2(40)
+ DOB                                       NOT NULL DATE
+ AGE                                                NUMBER(5)
+ CLASS                                     NOT NULL VARCHAR2(6)
+ MOBILENO                                  NOT NULL NUMBER(10)
+
+SQL> comit;
+SP2-0042: unknown command "comit" - rest of line ignored.
+SQL> commit;
+
+Commit complete.
+
+SQL> INSERT INTO Student
+  2  (Rollno, Name, City, Address, DOB, Age, Class, Mobileno)
+  3  VALUES
+  4  (10, 'Amit', 'Rajkot', 'University Road', DATE '2007-05-12', 18, 'Sem-2', 9876543210);
+(Rollno, Name, City, Address, DOB, Age, Class, Mobileno)
+                                               *
+ERROR at line 2:
+ORA-00904: "MOBILENO": invalid identifier 
+
+
+SQL> 
+SQL> INSERT INTO Student
+  2  (Rollno, Name, City, Address, DOB, Age, Class, Mobileno)
+  3  VALUES
+  4  (11, 'Bhavik', 'Surat', 'Adajan', DATE '2005-08-20', 20, 'Sem-3', 9876501234);
+(Rollno, Name, City, Address, DOB, Age, Class, Mobileno)
+                                               *
+ERROR at line 2:
+ORA-00904: "MOBILENO": invalid identifier 
+
+
+SQL> 
+SQL> INSERT INTO Student
+  2  (Rollno, Name, City, Address, DOB, Age, Class, Mobileno)
+  3  VALUES
+  4  (12, 'Chirag', 'Rajkot', 'Kalawad Road', DATE '2008-01-15', 17, 'Sem-2', 9988776655);
+(Rollno, Name, City, Address, DOB, Age, Class, Mobileno)
+                                               *
+ERROR at line 2:
+ORA-00904: "MOBILENO": invalid identifier 
+
+
+SQL> 
+SQL> INSERT INTO Student
+  2  (Rollno, Name, City, Address, DOB, Age, Class, Mobileno)
+  3  VALUES
+  4  (13, 'Dhruv', 'Ahmedabad', 'CG Road', DATE '2004-11-10', 21, 'Sem-4', 9123456789);
+(Rollno, Name, City, Address, DOB, Age, Class, Mobileno)
+                                               *
+ERROR at line 2:
+ORA-00904: "MOBILENO": invalid identifier 
+
+
+SQL> 
+SQL> INSERT INTO Student
+  2  (Rollno, Name, City, Address, DOB, Age, Class, Mobileno)
+  3  VALUES
+  4  (14, 'Esha', 'Jamnagar', 'Station Road', DATE '2006-03-25', 19, 'Sem-3', 9012345678);
+(Rollno, Name, City, Address, DOB, Age, Class, Mobileno)
+                                               *
+ERROR at line 2:
+ORA-00904: "MOBILENO": invalid identifier 
+
+
+SQL> INSERT INTO StudentesVALUES(10, 'Amit', 'Rajkot', 'University Road', DATE '2007-05-12', 18, 'Sem-2', 9876543210);
+INSERT INTO StudentesVALUES(10, 'Amit', 'Rajkot', 'University Road', DATE '2007-05-12', 18, 'Sem-2', 9876543210)
+                            *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> INSERT INTO Studentes VALUES(10, 'Amit', 'Rajkot', 'University Road', DATE '2007-05-12', 18, 'Sem-2', 9876543210);
+
+1 row created.
+
+SQL> INSERT INTO Studentes VALUES(11, 'Bhavik', 'Surat', 'Adajan', DATE '2005-08-20', 20, 'Sem-3', 9876501234);
+
+1 row created.
+
+SQL>  INSERT INTO Studentes VALUES(12, 'Chirag', 'Rajkot', 'Kalawad Road', DATE '2008-01-15', 17, 'Sem-2', 9988776655);
+
+1 row created.
+
+SQL>  INSERT INTO Studentes VALUES(13, 'Dhruv', 'Ahmedabad', 'CG Road', DATE '2004-11-10', 21, 'Sem-4', 9123456789);
+
+1 row created.
+
+SQL>  INSERT INTO Studentes VALUES(14, 'Esha', 'Jamnagar', 'Station Road', DATE '2006-03-25', 19, 'Sem-3', 9012345678);
+
+1 row created.
+
+SQL> select * from Studentes;
+
+    ROLLNO NAME                 CITY                                            
+---------- -------------------- ----------                                      
+ADDRESS                                  DOB              AGE CLASS    MOBILENO 
+---------------------------------------- --------- ---------- ------ ---------- 
+        10 Amit                 Rajkot                                          
+University Road                          12-MAY-07         18 Sem-2  9876543210 
+                                                                                
+        11 Bhavik               Surat                                           
+Adajan                                   20-AUG-05         20 Sem-3  9876501234 
+                                                                                
+        12 Chirag               Rajkot                                          
+Kalawad Road                             15-JAN-08         17 Sem-2  9988776655 
+                                                                                
+
+    ROLLNO NAME                 CITY                                            
+---------- -------------------- ----------                                      
+ADDRESS                                  DOB              AGE CLASS    MOBILENO 
+---------------------------------------- --------- ---------- ------ ---------- 
+        13 Dhruv                Ahmedabad                                       
+CG Road                                  10-NOV-04         21 Sem-4  9123456789 
+                                                                                
+        14 Esha                 Jamnagar                                        
+Station Road                             25-MAR-06         19 Sem-3  9012345678 
+                                                                                
+
+SQL> set linesize 100;
+SQL> select * from Studentes;
+
+    ROLLNO NAME                 CITY       ADDRESS                                  DOB             
+---------- -------------------- ---------- ---------------------------------------- ---------       
+       AGE CLASS    MOBILENO                                                                        
+---------- ------ ----------                                                                        
+        10 Amit                 Rajkot     University Road                          12-MAY-07       
+        18 Sem-2  9876543210                                                                        
+                                                                                                    
+        11 Bhavik               Surat      Adajan                                   20-AUG-05       
+        20 Sem-3  9876501234                                                                        
+                                                                                                    
+        12 Chirag               Rajkot     Kalawad Road                             15-JAN-08       
+        17 Sem-2  9988776655                                                                        
+                                                                                                    
+
+    ROLLNO NAME                 CITY       ADDRESS                                  DOB             
+---------- -------------------- ---------- ---------------------------------------- ---------       
+       AGE CLASS    MOBILENO                                                                        
+---------- ------ ----------                                                                        
+        13 Dhruv                Ahmedabad  CG Road                                  10-NOV-04       
+        21 Sem-4  9123456789                                                                        
+                                                                                                    
+        14 Esha                 Jamnagar   Station Road                             25-MAR-06       
+        19 Sem-3  9012345678                                                                        
+                                                                                                    
+
+SQL> set linesize 150;
+SQL>  select * from Studentes;
+
+    ROLLNO NAME                 CITY       ADDRESS                                  DOB              AGE CLASS    MOBILENO                            
+---------- -------------------- ---------- ---------------------------------------- --------- ---------- ------ ----------                            
+        10 Amit                 Rajkot     University Road                          12-MAY-07         18 Sem-2  9876543210                            
+        11 Bhavik               Surat      Adajan                                   20-AUG-05         20 Sem-3  9876501234                            
+        12 Chirag               Rajkot     Kalawad Road                             15-JAN-08         17 Sem-2  9988776655                            
+        13 Dhruv                Ahmedabad  CG Road                                  10-NOV-04         21 Sem-4  9123456789                            
+        14 Esha                 Jamnagar   Station Road                             25-MAR-06         19 Sem-3  9012345678                            
+
+SQL> select * from Studentes where age<18;
+
+    ROLLNO NAME                 CITY       ADDRESS                                  DOB              AGE CLASS    MOBILENO                            
+---------- -------------------- ---------- ---------------------------------------- --------- ---------- ------ ----------                            
+        12 Chirag               Rajkot     Kalawad Road                             15-JAN-08         17 Sem-2  9988776655                            
+
+SQL> selct age, name from studentes order by name ace,age desc;
+SP2-0734: unknown command beginning "selct age,..." - rest of line ignored.
+SQL> select  age, name from studentes order by name asc,age desc;
+
+       AGE NAME                                                                                                                                       
+---------- --------------------                                                                                                                       
+        18 Amit                                                                                                                                       
+        20 Bhavik                                                                                                                                     
+        17 Chirag                                                                                                                                     
+        21 Dhruv                                                                                                                                      
+        19 Esha                                                                                                                                       
+
+SQL>  select name,age from studentes order by name asc,age desc;
+
+NAME                        AGE                                                                                                                       
+-------------------- ----------                                                                                                                       
+Amit                         18                                                                                                                       
+Bhavik                       20                                                                                                                       
+Chirag                       17                                                                                                                       
+Dhruv                        21                                                                                                                       
+Esha                         19                                                                                                                       
+
+SQL> update studentes set city='Jamnagar' where city='Rajkot';
+
+2 rows updated.
+
+SQL> select * from studentes;
+
+    ROLLNO NAME                 CITY       ADDRESS                                  DOB              AGE CLASS    MOBILENO                            
+---------- -------------------- ---------- ---------------------------------------- --------- ---------- ------ ----------                            
+        10 Amit                 Jamnagar   University Road                          12-MAY-07         18 Sem-2  9876543210                            
+        11 Bhavik               Surat      Adajan                                   20-AUG-05         20 Sem-3  9876501234                            
+        12 Chirag               Jamnagar   Kalawad Road                             15-JAN-08         17 Sem-2  9988776655                            
+        13 Dhruv                Ahmedabad  CG Road                                  10-NOV-04         21 Sem-4  9123456789                            
+        14 Esha                 Jamnagar   Station Road                             25-MAR-06         19 Sem-3  9012345678                            
+
+SQL> update studentes set class='sem-3' where rollno=10;
+
+1 row updated.
+
+SQL> select * from studentes;
+
+    ROLLNO NAME                 CITY       ADDRESS                                  DOB              AGE CLASS    MOBILENO                            
+---------- -------------------- ---------- ---------------------------------------- --------- ---------- ------ ----------                            
+        10 Amit                 Jamnagar   University Road                          12-MAY-07         18 sem-3  9876543210                            
+        11 Bhavik               Surat      Adajan                                   20-AUG-05         20 Sem-3  9876501234                            
+        12 Chirag               Jamnagar   Kalawad Road                             15-JAN-08         17 Sem-2  9988776655                            
+        13 Dhruv                Ahmedabad  CG Road                                  10-NOV-04         21 Sem-4  9123456789                            
+        14 Esha                 Jamnagar   Station Road                             25-MAR-06         19 Sem-3  9012345678                            
+
+SQL> delete from studentes where age>20;
+
+1 row deleted.
+
+SQL> select * from studentes;
+
+    ROLLNO NAME                 CITY       ADDRESS                                  DOB              AGE CLASS    MOBILENO                            
+---------- -------------------- ---------- ---------------------------------------- --------- ---------- ------ ----------                            
+        10 Amit                 Jamnagar   University Road                          12-MAY-07         18 sem-3  9876543210                            
+        11 Bhavik               Surat      Adajan                                   20-AUG-05         20 Sem-3  9876501234                            
+        12 Chirag               Jamnagar   Kalawad Road                             15-JAN-08         17 Sem-2  9988776655                            
+        14 Esha                 Jamnagar   Station Road                             25-MAR-06         19 Sem-3  9012345678                            
+
+SQL> delete from studentes where city='Jamager' and Class!='sem=3';
+
+0 rows deleted.
+
+SQL>  delete from studentes where city='jamnagar' and class!='sem-3';
+
+0 rows deleted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create table salesman (sid number(5)PRIMARY KEY,sname varchar2(20)NOT NULL,city varchar2(10),sal number(7),comm number(5));
+
+Table created.
+
+SQL> INSERT INTO Salesman VALUES (1, 'Amit', 'Mumbai', 3000, 500);
+
+1 row created.
+
+SQL> INSERT INTO Salesman VALUES (2, 'Sanjay', 'Delhi', 4000, 700);
+
+1 row created.
+
+SQL> INSERT INTO Salesman VALUES (3, 'Rakesh', 'Puna', 3500, 600);
+
+1 row created.
+
+SQL> INSERT INTO Salesman VALUES (4, 'Suresh', 'Bombay', 4500, 800);
+
+1 row created.
+
+SQL> INSERT INTO Salesman VALUES (8, 'Sachin', 'Mumbai', 3000, 900);
+
+1 row created.
+
+SQL> select * from salesman;
+
+       SID SNAME                CITY              SAL       COMM                                                                                      
+---------- -------------------- ---------- ---------- ----------                                                                                      
+         1 Amit                 Mumbai           3000        500                                                                                      
+         2 Sanjay               Delhi            4000        700                                                                                      
+         3 Rakesh               Puna             3500        600                                                                                      
+         4 Suresh               Bombay           4500        800                                                                                      
+         8 Sachin               Mumbai           3000        900                                                                                      
+
+SQL> select * from salesman where city='Mumbai';
+
+       SID SNAME                CITY              SAL       COMM                                                                                      
+---------- -------------------- ---------- ---------- ----------                                                                                      
+         1 Amit                 Mumbai           3000        500                                                                                      
+         8 Sachin               Mumbai           3000        900                                                                                      
+
+SQL> SELECT MAX(Comm) AS Maximum_Commission
+  2  FROM Salesman;
+
+MAXIMUM_COMMISSION                                                                                                                                    
+------------------                                                                                                                                    
+               900                                                                                                                                    
+
+SQL>  SELECT MAX(Comm) AS Maximum_Commission  FROM Salesman;
+
+MAXIMUM_COMMISSION                                                                                                                                    
+------------------                                                                                                                                    
+               900                                                                                                                                    
+
+SQL> select * from salesman where sal=3000;
+
+       SID SNAME                CITY              SAL       COMM                                                                                      
+---------- -------------------- ---------- ---------- ----------                                                                                      
+         1 Amit                 Mumbai           3000        500                                                                                      
+         8 Sachin               Mumbai           3000        900                                                                                      
+
+SQL> select sname from salesman where sal=3000;
+
+SNAME                                                                                                                                                 
+--------------------                                                                                                                                  
+Amit                                                                                                                                                  
+Sachin                                                                                                                                                
+
+SQL> UPDATE Salesman
+  2  SET City = 'Puna'
+  3  WHERE Sid = 8;
+
+1 row updated.
+
+SQL>  UPDATE Salesman  SET City = 'Puna' WHERE Sid = 8;
+
+1 row updated.
+
+SQL> select * from salesman where sid=8;
+
+       SID SNAME                CITY              SAL       COMM                                                                                      
+---------- -------------------- ---------- ---------- ----------                                                                                      
+         8 Sachin               Puna             3000        900                                                                                      
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 
