@@ -1,0 +1,177 @@
+ select distinct e.deptno AS Departmentno,e.ename AS Employee,m.ename AS Manager FROM emp e LEFT JOIN emp m ON e.mgr= m.empno ORDER by e.deptno;
+
+DEPARTMENTNO EMPLOYEE   MANAGER                                                 
+------------ ---------- ----------                                              
+          10 CLARK      KING                                                    
+          10 KING                                                               
+          10 MILLER     CLARK                                                   
+          20 ADAMS      SCOTT                                                   
+          20 FORD       JONES                                                   
+          20 JONES      KING                                                    
+          20 SCOTT      JONES                                                   
+          20 SMITH      FORD                                                    
+          30 ALLEN      BLAKE                                                   
+          30 BLAKE      KING                                                    
+          30 JAMES      BLAKE                                                   
+
+DEPARTMENTNO EMPLOYEE   MANAGER                                                 
+------------ ---------- ----------                                              
+          30 MARTIN     BLAKE                                                   
+          30 TURNER     BLAKE                                                   
+          30 WARD       BLAKE                                                   
+
+14 rows selected.
+
+SQL> select ename FROM Emp WHERE deptno IN (select deptno FROM dept WHERE dname IN ['RESEARCH','SALES']);
+select ename FROM Emp WHERE deptno IN (select deptno FROM dept WHERE dname IN ['RESEARCH','SALES'])
+                                                                              *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select ename FROM Emp WHERE deptno IN (select deptno FROM dept WHERE dname IN ('RESEARCH','SALES'));
+
+ENAME                                                                           
+----------                                                                      
+JONES                                                                           
+FORD                                                                            
+ADAMS                                                                           
+SMITH                                                                           
+SCOTT                                                                           
+WARD                                                                            
+TURNER                                                                          
+ALLEN                                                                           
+JAMES                                                                           
+BLAKE                                                                           
+MARTIN                                                                          
+
+11 rows selected.
+
+SQL> select * FROM emp NATURAL JOIN dept;
+
+    DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL      
+---------- ---------- ---------- --------- ---------- --------- ----------      
+      COMM DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        10       7782 CLARK      MANAGER         7839 09-JUN-81       2450      
+           ACCOUNTING     NEW YORK                                              
+                                                                                
+        10       7839 KING       PRESIDENT            17-NOV-81       5000      
+           ACCOUNTING     NEW YORK                                              
+                                                                                
+        10       7934 MILLER     CLERK           7782 23-JAN-82       1300      
+           ACCOUNTING     NEW YORK                                              
+                                                                                
+
+    DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL      
+---------- ---------- ---------- --------- ---------- --------- ----------      
+      COMM DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        20       7566 JONES      MANAGER         7839 02-APR-81       2975      
+           RESEARCH       DALLAS                                                
+                                                                                
+        20       7902 FORD       ANALYST         7566 03-DEC-81       3000      
+           RESEARCH       DALLAS                                                
+                                                                                
+        20       7876 ADAMS      CLERK           7788 23-MAY-87       1100      
+           RESEARCH       DALLAS                                                
+                                                                                
+
+    DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL      
+---------- ---------- ---------- --------- ---------- --------- ----------      
+      COMM DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        20       7369 SMITH      CLERK           7902 17-DEC-80        800      
+           RESEARCH       DALLAS                                                
+                                                                                
+        20       7788 SCOTT      ANALYST         7566 19-APR-87       3000      
+           RESEARCH       DALLAS                                                
+                                                                                
+        30       7521 WARD       SALESMAN        7698 22-FEB-81       1250      
+       500 SALES          CHICAGO                                               
+                                                                                
+
+    DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL      
+---------- ---------- ---------- --------- ---------- --------- ----------      
+      COMM DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        30       7844 TURNER     SALESMAN        7698 08-SEP-81       1500      
+         0 SALES          CHICAGO                                               
+                                                                                
+        30       7499 ALLEN      SALESMAN        7698 20-FEB-81       1600      
+       300 SALES          CHICAGO                                               
+                                                                                
+        30       7900 JAMES      CLERK           7698 03-DEC-81        950      
+           SALES          CHICAGO                                               
+                                                                                
+
+    DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL      
+---------- ---------- ---------- --------- ---------- --------- ----------      
+      COMM DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        30       7698 BLAKE      MANAGER         7839 01-MAY-81       2850      
+           SALES          CHICAGO                                               
+                                                                                
+        30       7654 MARTIN     SALESMAN        7698 28-SEP-81       1250      
+      1400 SALES          CHICAGO                                               
+                                                                                
+
+14 rows selected.
+
+SQL>  SET LINESIZE 200;
+SQL>  select * FROM emp NATURAL JOIN dept;
+
+    DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM DNAME          LOC                                                                                                
+---------- ---------- ---------- --------- ---------- --------- ---------- ---------- -------------- -------------                                                                                      
+        10       7782 CLARK      MANAGER         7839 09-JUN-81       2450            ACCOUNTING     NEW YORK                                                                                           
+        10       7839 KING       PRESIDENT            17-NOV-81       5000            ACCOUNTING     NEW YORK                                                                                           
+        10       7934 MILLER     CLERK           7782 23-JAN-82       1300            ACCOUNTING     NEW YORK                                                                                           
+        20       7566 JONES      MANAGER         7839 02-APR-81       2975            RESEARCH       DALLAS                                                                                             
+        20       7902 FORD       ANALYST         7566 03-DEC-81       3000            RESEARCH       DALLAS                                                                                             
+        20       7876 ADAMS      CLERK           7788 23-MAY-87       1100            RESEARCH       DALLAS                                                                                             
+        20       7369 SMITH      CLERK           7902 17-DEC-80        800            RESEARCH       DALLAS                                                                                             
+        20       7788 SCOTT      ANALYST         7566 19-APR-87       3000            RESEARCH       DALLAS                                                                                             
+        30       7521 WARD       SALESMAN        7698 22-FEB-81       1250        500 SALES          CHICAGO                                                                                            
+        30       7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0 SALES          CHICAGO                                                                                            
+        30       7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300 SALES          CHICAGO                                                                                            
+
+    DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM DNAME          LOC                                                                                                
+---------- ---------- ---------- --------- ---------- --------- ---------- ---------- -------------- -------------                                                                                      
+        30       7900 JAMES      CLERK           7698 03-DEC-81        950            SALES          CHICAGO                                                                                            
+        30       7698 BLAKE      MANAGER         7839 01-MAY-81       2850            SALES          CHICAGO                                                                                            
+        30       7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400 SALES          CHICAGO                                                                                            
+
+14 rows selected.
+
+SQL>  SET LINESIZE 250;
+SQL>  select * FROM emp NATURAL JOIN dept;
+
+    DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM DNAME          LOC                                                                                                                                                  
+---------- ---------- ---------- --------- ---------- --------- ---------- ---------- -------------- -------------                                                                                                                                        
+        10       7782 CLARK      MANAGER         7839 09-JUN-81       2450            ACCOUNTING     NEW YORK                                                                                                                                             
+        10       7839 KING       PRESIDENT            17-NOV-81       5000            ACCOUNTING     NEW YORK                                                                                                                                             
+        10       7934 MILLER     CLERK           7782 23-JAN-82       1300            ACCOUNTING     NEW YORK                                                                                                                                             
+        20       7566 JONES      MANAGER         7839 02-APR-81       2975            RESEARCH       DALLAS                                                                                                                                               
+        20       7902 FORD       ANALYST         7566 03-DEC-81       3000            RESEARCH       DALLAS                                                                                                                                               
+        20       7876 ADAMS      CLERK           7788 23-MAY-87       1100            RESEARCH       DALLAS                                                                                                                                               
+        20       7369 SMITH      CLERK           7902 17-DEC-80        800            RESEARCH       DALLAS                                                                                                                                               
+        20       7788 SCOTT      ANALYST         7566 19-APR-87       3000            RESEARCH       DALLAS                                                                                                                                               
+        30       7521 WARD       SALESMAN        7698 22-FEB-81       1250        500 SALES          CHICAGO                                                                                                                                              
+        30       7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0 SALES          CHICAGO                                                                                                                                              
+        30       7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300 SALES          CHICAGO                                                                                                                                              
+
+    DEPTNO      EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM DNAME          LOC                                                                                                                                                  
+---------- ---------- ---------- --------- ---------- --------- ---------- ---------- -------------- -------------                                                                                                                                        
+        30       7900 JAMES      CLERK           7698 03-DEC-81        950            SALES          CHICAGO                                                                                                                                              
+        30       7698 BLAKE      MANAGER         7839 01-MAY-81       2850            SALES          CHICAGO                                                                                                                                              
+        30       7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400 SALES          CHICAGO                                                                                                                                              
+
+14 rows selected.
+
+SQL> select ename , sal FROM emp WHERE sal=(select MAX(sal) FROM emp);
+
+ENAME             SAL                                                                                                                                                                                                                                     
+---------- ----------                                                                                                                                                                                                                                     
+KING             5000                                                                                                                                                                                                                                     
+
+SQL> 
