@@ -1,0 +1,559 @@
+select dept_no, COUNT(emp_no) AS total_employee,SUM(sal) AS total_salary FROM emp GROUP BY dept_no;
+select dept_no, COUNT(emp_no) AS total_employee,SUM(sal) AS total_salary FROM emp GROUP BY dept_no
+                                                                                           *
+ERROR at line 1:
+ORA-00904: "DEPT_NO": invalid identifier 
+
+
+SQL> select deptno, COUNT(emp_no) AS total_employee,SUM(sal) AS total_salary FROM emp GROUP BY deptno;
+select deptno, COUNT(emp_no) AS total_employee,SUM(sal) AS total_salary FROM emp GROUP BY deptno
+                     *
+ERROR at line 1:
+ORA-00904: "EMP_NO": invalid identifier 
+
+
+SQL>  select deptno, COUNT(emp_id) AS total_employee,SUM(sal) AS total_salary FROM emp GROUP BY deptno;
+ select deptno, COUNT(emp_id) AS total_employee,SUM(sal) AS total_salary FROM emp GROUP BY deptno
+                      *
+ERROR at line 1:
+ORA-00904: "EMP_ID": invalid identifier 
+
+
+SQL>  select deptno, COUNT(emp_id) AS total_employee,SUM(sal) AS total_salary FROM employee  GROUP BY deptno;
+ select deptno, COUNT(emp_id) AS total_employee,SUM(sal) AS total_salary FROM employee  GROUP BY deptno
+                                                                                                 *
+ERROR at line 1:
+ORA-00904: "DEPTNO": invalid identifier 
+
+
+SQL> select dept_id, COUNT (emp_id) AS total_employee, SUM(salary) AS total_salary FROM Employee GROUP BY dept_id;
+
+   DEPT_ID TOTAL_EMPLOYEE TOTAL_SALARY                                          
+---------- -------------- ------------                                          
+        30              1        14650                                          
+        20              2        30000                                          
+        40              1        17000                                          
+        10              7       394000                                          
+
+SQL> select dept_id,COUNT (emp_id)AS total_employee, SUM(sal) AS total_salary FROM Employee GROUP BU
+  2  
+SQL>  select dept_id,COUNT (emp_id)AS total_employee, SUM(sal) AS total_salary FROM Employee GROUP by dept_id HAVING sum(salary)>9000;
+ select dept_id,COUNT (emp_id)AS total_employee, SUM(sal) AS total_salary FROM Employee GROUP by dept_id HAVING sum(salary)>9000
+                                                     *
+ERROR at line 1:
+ORA-00904: "SAL": invalid identifier 
+
+
+SQL> select dept_id,COUNT (emp_id)AS total_employee, SUM(salary) AS total_salary FROM Employee GROUP by dept_id HAVING sum(salary)>9000;
+
+   DEPT_ID TOTAL_EMPLOYEE TOTAL_SALARY                                          
+---------- -------------- ------------                                          
+        30              1        14650                                          
+        20              2        30000                                          
+        40              1        17000                                          
+        10              7       394000                                          
+
+SQL> select dept_id, COUNT (emp_id) AS total_employee, SUM(salary) AS total_salary FROM employee GROUP BY CUBE (dept_id,salary);
+
+   DEPT_ID TOTAL_EMPLOYEE TOTAL_SALARY                                          
+---------- -------------- ------------                                          
+                       11       455650                                          
+                        1        30000                                          
+                        1        90000                                          
+                        1        12000                                          
+                        2        30000                                          
+                        1        17000                                          
+                        1        18000                                          
+                        1        35000                                          
+                        1        85000                                          
+                        1       124000                                          
+                        1        14650                                          
+
+   DEPT_ID TOTAL_EMPLOYEE TOTAL_SALARY                                          
+---------- -------------- ------------                                          
+        10              7       394000                                          
+        10              1        30000                                          
+        10              1        90000                                          
+        10              2        30000                                          
+        10              1        35000                                          
+        10              1        85000                                          
+        10              1       124000                                          
+        20              2        30000                                          
+        20              1        12000                                          
+        20              1        18000                                          
+        30              1        14650                                          
+
+   DEPT_ID TOTAL_EMPLOYEE TOTAL_SALARY                                          
+---------- -------------- ------------                                          
+        30              1        14650                                          
+        40              1        17000                                          
+        40              1        17000                                          
+
+25 rows selected.
+
+SQL> set linesize 100;
+SQL> SQL> select dept_id, COUNT (emp_id) AS total_employee, SUM(salary) AS total_salary FROM employee GRO
+SP2-0734: unknown command beginning "SQL> selec..." - rest of line ignored.
+SQL> UP BY CUBE (dept_id,salary);
+SP2-0734: unknown command beginning "UP BY CUBE..." - rest of line ignored.
+SQL>  select dept_id, COUNT (emp_id) AS total_employee, SUM(salary) AS total_salary FROM employee GROUP BY CUBE (dept_id,salary);
+
+   DEPT_ID TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+                       11       455650                                                              
+                        1        30000                                                              
+                        1        90000                                                              
+                        1        12000                                                              
+                        2        30000                                                              
+                        1        17000                                                              
+                        1        18000                                                              
+                        1        35000                                                              
+                        1        85000                                                              
+                        1       124000                                                              
+                        1        14650                                                              
+
+   DEPT_ID TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+        10              7       394000                                                              
+        10              1        30000                                                              
+        10              1        90000                                                              
+        10              2        30000                                                              
+        10              1        35000                                                              
+        10              1        85000                                                              
+        10              1       124000                                                              
+        20              2        30000                                                              
+        20              1        12000                                                              
+        20              1        18000                                                              
+        30              1        14650                                                              
+
+   DEPT_ID TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+        30              1        14650                                                              
+        40              1        17000                                                              
+        40              1        17000                                                              
+
+25 rows selected.
+
+SQL> select dept_id, COUNT(emp_id) AS total_employee, SUM(salary) AS toal_salary FROM Employee GROUP BY ROLLUP (dept_id , salary);
+
+   DEPT_ID TOTAL_EMPLOYEE TOAL_SALARY                                                               
+---------- -------------- -----------                                                               
+        10              1       30000                                                               
+        10              1       90000                                                               
+        10              2       30000                                                               
+        10              1       35000                                                               
+        10              1       85000                                                               
+        10              1      124000                                                               
+        10              7      394000                                                               
+        20              1       12000                                                               
+        20              1       18000                                                               
+        20              2       30000                                                               
+        30              1       14650                                                               
+
+   DEPT_ID TOTAL_EMPLOYEE TOAL_SALARY                                                               
+---------- -------------- -----------                                                               
+        30              1       14650                                                               
+        40              1       17000                                                               
+        40              1       17000                                                               
+                       11      455650                                                               
+
+15 rows selected.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> select dept_id, COUNT (emp_id) AS total_employee, SUM(salary) AS total_salary FROM Employee GROUP BY dept_id;
+
+   DEPT_ID TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+        30              1        14650                                                              
+        20              2        30000                                                              
+        40              1        17000                                                              
+        10              7       394000                                                              
+
+SQL> SELECT deptno,
+  2         COUNT(empno) AS total_employee,
+  3         SUM(sal) AS total_salary
+  4  FROM emp
+  5  GROUP BY deptno;
+
+    DEPTNO TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+        30              6         9400                                                              
+        20              5        10875                                                              
+        10              3         8750                                                              
+
+SQL> select deptno, count (empno) AS total_employee, SUM(sal) AS total_salary FROM emp GROUP BY deptno deptno HAVING SUM(sal)>9000;
+select deptno, count (empno) AS total_employee, SUM(sal) AS total_salary FROM emp GROUP BY deptno deptno HAVING SUM(sal)>9000
+                                                                                                  *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select deptno, count (empno) AS total_employee, SUM(sal) AS total_salary FROM emp GROUP BY deptno HAVING SUM(sal)>9000;
+
+    DEPTNO TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+        30              6         9400                                                              
+        20              5        10875                                                              
+
+SQL> select deptno,COUNT (empno) AS total_employee, SUM(sal) AS total_salary FROM emp GROUP BY CUBE(deptno, sal);
+
+    DEPTNO TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+                       14        29025                                                              
+                        1          800                                                              
+                        1         1100                                                              
+                        1         1300                                                              
+                        1         1500                                                              
+                        1         1600                                                              
+                        2         6000                                                              
+                        1         5000                                                              
+                        1          950                                                              
+                        2         2500                                                              
+                        1         2450                                                              
+
+    DEPTNO TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+                        1         2850                                                              
+                        1         2975                                                              
+        10              3         8750                                                              
+        10              1         1300                                                              
+        10              1         5000                                                              
+        10              1         2450                                                              
+        20              5        10875                                                              
+        20              1          800                                                              
+        20              1         1100                                                              
+        20              2         6000                                                              
+        20              1         2975                                                              
+
+    DEPTNO TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+        30              6         9400                                                              
+        30              1         1500                                                              
+        30              1         1600                                                              
+        30              1          950                                                              
+        30              2         2500                                                              
+        30              1         2850                                                              
+
+28 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> SELECT deptno,
+  2         COUNT(empno) AS total_employee,
+  3         SUM(sal) AS total_salary
+  4  FROM emp
+  5  GROUP BY CUBE(deptno);
+
+    DEPTNO TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+                       14        29025                                                              
+        10              3         8750                                                              
+        20              5        10875                                                              
+        30              6         9400                                                              
+
+SQL> SELECT deptno,
+  2         COUNT(empno) AS total_employee,
+  3         SUM(sal) AS total_salary
+  4  FROM emp
+  5  GROUP BY CUBE(deptno) ORDER BY (deptno);
+
+    DEPTNO TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+        10              3         8750                                                              
+        20              5        10875                                                              
+        30              6         9400                                                              
+                       14        29025                                                              
+
+SQL>  select deptno, COUNT (empno) AS total_employee, SUM(sal) AS total_salary FROM emp GROUP BY ROLLUP (deptno , sal);
+
+    DEPTNO TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+        10              1         1300                                                              
+        10              1         5000                                                              
+        10              1         2450                                                              
+        10              3         8750                                                              
+        20              1          800                                                              
+        20              1         1100                                                              
+        20              2         6000                                                              
+        20              1         2975                                                              
+        20              5        10875                                                              
+        30              1         1500                                                              
+        30              1         1600                                                              
+
+    DEPTNO TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+        30              1          950                                                              
+        30              2         2500                                                              
+        30              1         2850                                                              
+        30              6         9400                                                              
+                       14        29025                                                              
+
+16 rows selected.
+
+SQL> SELECT deptno,
+  2         COUNT(empno) AS total_employee,
+  3         SUM(sal) AS total_salary
+  4  FROM emp
+  5  GROUP BY ROLLUP(deptno);
+
+    DEPTNO TOTAL_EMPLOYEE TOTAL_SALARY                                                              
+---------- -------------- ------------                                                              
+        10              3         8750                                                              
+        20              5        10875                                                              
+        30              6         9400                                                              
+                       14        29025                                                              
+
+SQL> select e.empno ,e.ename,d.dname,d.loc.FROM emp e JOIN dept d ON e.deptno = d.deptno;
+select e.empno ,e.ename,d.dname,d.loc.FROM emp e JOIN dept d ON e.deptno = d.deptno
+                                      *
+ERROR at line 1:
+ORA-01747: invalid user.table.column, table.column, or column specification 
+
+
+SQL> select e.empno ,e.ename,d.dname,d.loc FROM emp e JOIN dept d ON e.deptno = d.deptno;
+
+     EMPNO ENAME      DNAME          LOC                                                            
+---------- ---------- -------------- -------------                                                  
+      7782 CLARK      ACCOUNTING     NEW YORK                                                       
+      7839 KING       ACCOUNTING     NEW YORK                                                       
+      7934 MILLER     ACCOUNTING     NEW YORK                                                       
+      7566 JONES      RESEARCH       DALLAS                                                         
+      7902 FORD       RESEARCH       DALLAS                                                         
+      7876 ADAMS      RESEARCH       DALLAS                                                         
+      7369 SMITH      RESEARCH       DALLAS                                                         
+      7788 SCOTT      RESEARCH       DALLAS                                                         
+      7521 WARD       SALES          CHICAGO                                                        
+      7844 TURNER     SALES          CHICAGO                                                        
+      7499 ALLEN      SALES          CHICAGO                                                        
+
+     EMPNO ENAME      DNAME          LOC                                                            
+---------- ---------- -------------- -------------                                                  
+      7900 JAMES      SALES          CHICAGO                                                        
+      7698 BLAKE      SALES          CHICAGO                                                        
+      7654 MARTIN     SALES          CHICAGO                                                        
+
+14 rows selected.
+
+SQL> select * fromemp;
+select * fromemp
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20               
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> select * from dept;
+
+    DEPTNO DNAME          LOC                                                                       
+---------- -------------- -------------                                                             
+        10 ACCOUNTING     NEW YORK                                                                  
+        20 RESEARCH       DALLAS                                                                    
+        30 SALES          CHICAGO                                                                   
+        40 OPERATIONS     BOSTON                                                                    
+
+SQL> select e.ename , e.sal, s.grade, FROM emp e JOIN salgrade s on e.sal BETWEEN s.losal AND s.hisal;
+select e.ename , e.sal, s.grade, FROM emp e JOIN salgrade s on e.sal BETWEEN s.losal AND s.hisal
+                                 *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select e.ename , e.sal, s.grad FROM emp e JOIN salgrade s on e.sal BETWEEN s.losal AND s.hisal;
+select e.ename , e.sal, s.grad FROM emp e JOIN salgrade s on e.sal BETWEEN s.losal AND s.hisal
+                        *
+ERROR at line 1:
+ORA-00904: "S"."GRAD": invalid identifier 
+
+
+SQL>  select e.ename , e.sal, s.grade FROM emp e JOIN salgrade s on e.sal BETWEEN s.losal AND s.hisal;
+
+ENAME             SAL      GRADE                                                                    
+---------- ---------- ----------                                                                    
+SMITH             800          1                                                                    
+JAMES             950          1                                                                    
+ADAMS            1100          1                                                                    
+WARD             1250          2                                                                    
+MARTIN           1250          2                                                                    
+MILLER           1300          2                                                                    
+TURNER           1500          3                                                                    
+ALLEN            1600          3                                                                    
+CLARK            2450          4                                                                    
+BLAKE            2850          4                                                                    
+JONES            2975          4                                                                    
+
+ENAME             SAL      GRADE                                                                    
+---------- ---------- ----------                                                                    
+SCOTT            3000          4                                                                    
+FORD             3000          4                                                                    
+KING             5000          5                                                                    
+
+14 rows selected.
+
+SQL> select e.empno,e.ename,d.deptno,d.dname FROM emp e INNER JOIN dept d ON e.deptno = d.deptno;
+
+     EMPNO ENAME          DEPTNO DNAME                                                              
+---------- ---------- ---------- --------------                                                     
+      7782 CLARK              10 ACCOUNTING                                                         
+      7839 KING               10 ACCOUNTING                                                         
+      7934 MILLER             10 ACCOUNTING                                                         
+      7566 JONES              20 RESEARCH                                                           
+      7902 FORD               20 RESEARCH                                                           
+      7876 ADAMS              20 RESEARCH                                                           
+      7369 SMITH              20 RESEARCH                                                           
+      7788 SCOTT              20 RESEARCH                                                           
+      7521 WARD               30 SALES                                                              
+      7844 TURNER             30 SALES                                                              
+      7499 ALLEN              30 SALES                                                              
+
+     EMPNO ENAME          DEPTNO DNAME                                                              
+---------- ---------- ---------- --------------                                                     
+      7900 JAMES              30 SALES                                                              
+      7698 BLAKE              30 SALES                                                              
+      7654 MARTIN             30 SALES                                                              
+
+14 rows selected.
+
+SQL> select e.empno,e.ename,d.deptno, d.dname FROM emp e LEFT OUTER JOIN dept d ON e.deptno = d.deptno;
+
+     EMPNO ENAME          DEPTNO DNAME                                                              
+---------- ---------- ---------- --------------                                                     
+      7934 MILLER             10 ACCOUNTING                                                         
+      7839 KING               10 ACCOUNTING                                                         
+      7782 CLARK              10 ACCOUNTING                                                         
+      7902 FORD               20 RESEARCH                                                           
+      7876 ADAMS              20 RESEARCH                                                           
+      7788 SCOTT              20 RESEARCH                                                           
+      7566 JONES              20 RESEARCH                                                           
+      7369 SMITH              20 RESEARCH                                                           
+      7900 JAMES              30 SALES                                                              
+      7844 TURNER             30 SALES                                                              
+      7698 BLAKE              30 SALES                                                              
+
+     EMPNO ENAME          DEPTNO DNAME                                                              
+---------- ---------- ---------- --------------                                                     
+      7654 MARTIN             30 SALES                                                              
+      7521 WARD               30 SALES                                                              
+      7499 ALLEN              30 SALES                                                              
+
+14 rows selected.
+
+SQL> select e.empno,e.ename,d.deptno,d.dname FROM emp e RIGHT OUTER JOIN dept d ON e.deptno = d.deptno;
+
+     EMPNO ENAME          DEPTNO DNAME                                                              
+---------- ---------- ---------- --------------                                                     
+      7782 CLARK              10 ACCOUNTING                                                         
+      7839 KING               10 ACCOUNTING                                                         
+      7934 MILLER             10 ACCOUNTING                                                         
+      7566 JONES              20 RESEARCH                                                           
+      7902 FORD               20 RESEARCH                                                           
+      7876 ADAMS              20 RESEARCH                                                           
+      7369 SMITH              20 RESEARCH                                                           
+      7788 SCOTT              20 RESEARCH                                                           
+      7521 WARD               30 SALES                                                              
+      7844 TURNER             30 SALES                                                              
+      7499 ALLEN              30 SALES                                                              
+
+     EMPNO ENAME          DEPTNO DNAME                                                              
+---------- ---------- ---------- --------------                                                     
+      7900 JAMES              30 SALES                                                              
+      7698 BLAKE              30 SALES                                                              
+      7654 MARTIN             30 SALES                                                              
+                              40 OPERATIONS                                                         
+
+15 rows selected.
+
+SQL> select e.empno,e.ename,d.deptno,d.dname FROM emp e FULL OUTER JOIN dept d ON e.deptno = d.deptno;
+
+     EMPNO ENAME          DEPTNO DNAME                                                              
+---------- ---------- ---------- --------------                                                     
+      7934 MILLER             10 ACCOUNTING                                                         
+      7839 KING               10 ACCOUNTING                                                         
+      7782 CLARK              10 ACCOUNTING                                                         
+      7902 FORD               20 RESEARCH                                                           
+      7876 ADAMS              20 RESEARCH                                                           
+      7788 SCOTT              20 RESEARCH                                                           
+      7566 JONES              20 RESEARCH                                                           
+      7369 SMITH              20 RESEARCH                                                           
+      7900 JAMES              30 SALES                                                              
+      7844 TURNER             30 SALES                                                              
+      7698 BLAKE              30 SALES                                                              
+
+     EMPNO ENAME          DEPTNO DNAME                                                              
+---------- ---------- ---------- --------------                                                     
+      7654 MARTIN             30 SALES                                                              
+      7521 WARD               30 SALES                                                              
+      7499 ALLEN              30 SALES                                                              
+                              40 OPERATIONS                                                         
+
+15 rows selected.
+
+SQL> select distinct e.deptno AS Department no,e.name AS Employee,m.ename AS Manager FROM emp e LEFT JOIN emp m ON e.mgr= m.empno ORDER by e.deptno;
+select distinct e.deptno AS Department no,e.name AS Employee,m.ename AS Manager FROM emp e LEFT JOIN emp m ON e.mgr= m.empno ORDER by e.deptno
+                                       *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select distinct e.deptno AS Departmentno,e.name AS Employee,m.ename AS Manager FROM emp e LEFT JOIN emp m ON e.mgr= m.empno ORDER by e.deptno;
+select distinct e.deptno AS Departmentno,e.name AS Employee,m.ename AS Manager FROM emp e LEFT JOIN emp m ON e.mgr= m.empno ORDER by e.deptno
+                                         *
+ERROR at line 1:
+ORA-00904: "E"."NAME": invalid identifier 
+
+
+SQL>  select distinct e.deptno AS Departmentno,e.ename AS Employee,m.ename AS Manager FROM emp e LEFTJOIN emp m ON e.mgr= m.empno ORDER by e.deptno;
+ select distinct e.deptno AS Departmentno,e.ename AS Employee,m.ename AS Manager FROM emp e LEFTJOIN emp m ON e.mgr= m.empno ORDER by e.deptno
+                                                                                            *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> 
