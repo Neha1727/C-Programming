@@ -1,3 +1,4 @@
+//example of inline function
 #include<iostream.h>
 #include<conio.h>
 inline int max(int x,int y)
@@ -14,6 +15,6 @@ void main()
 	cout<<"Enter two numbers:";
 	cin>>x>>y;
 	z=max(x,y);
-	cout<<"\nx="<<x<<"\ty="<<y<<"\tz="<<z;
+	cout<<"\nx="<<x<<"\t y="<<y<<"\t z="<<z;
 	getch();
 }
